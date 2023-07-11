@@ -42,9 +42,37 @@ class Node:
         if parent is not None:
             parent.add_child(self)
 
-child1 = Node('child1')
-parent = Node('parent')
-child2 = Node('child2')
+    def depth_search(self, value):
+        if self.value == value:
+            return self
+        
+        if len(self.children) > 0:
+            left_result = self.children[0].depth_search(value)
+            if left_result is not None:
+                return left_result
+        
+        if len(self.children) > 1:
+            if self.children[1].depth_search(value) is not None:
+                return self.children[1].depth_search(value)
 
-child1.parent = parent
-child2.parent = parent
+        return None
+    
+    def breadth_search(self, value):
+        if self.value == value:
+            return self
+
+
+nodes = [Node(i) for i in "abcdefg"]
+
+parent_index = 0
+for index, child in enumerate(nodes):
+    if index == 0:
+        continue
+    child.parent = nodes[parent_index]
+    parent_index += 1 if index % 2 == 0 else 0
+
+for i in [0, 1, 3, 4]:
+    print(nodes[i].value)
+# print(nodes[0].depth_search('a'))
+print(nodes[0].depth_search('e'))
+print('done')
