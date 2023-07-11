@@ -58,21 +58,14 @@ class Node:
         return None
     
     def breadth_search(self, value):
-        if self.value == value:
-            return self
+        queue = [self]
 
+        while len(queue) > 0:
+            current_node = queue.pop(0)
+            if current_node.value == value:
+                return current_node 
+            
+            for child in current_node.children:
+                queue.append(child)
 
-nodes = [Node(i) for i in "abcdefg"]
-
-parent_index = 0
-for index, child in enumerate(nodes):
-    if index == 0:
-        continue
-    child.parent = nodes[parent_index]
-    parent_index += 1 if index % 2 == 0 else 0
-
-for i in [0, 1, 3, 4]:
-    print(nodes[i].value)
-# print(nodes[0].depth_search('a'))
-print(nodes[0].depth_search('e'))
-print('done')
+        return None
