@@ -37,8 +37,8 @@ class KnightPathFinder:
         return valid_moves.difference(self._considered_positions)
 
 
-knight = KnightPathFinder((0,0))
-print(knight.get_valid_moves((5,4)))
-knight._considered_positions.add((7,5))
-print(knight.new_move_positions((5,4)))
-print(knight.new_move_positions((0,0)))
+# knight = KnightPathFinder((0,0))
+# print(knight.get_valid_moves((5,4)))
+# knight._considered_positions.add((7,5))
+# print(knight.new_move_positions((5,4)))
+# print(knight.new_move_positions((0,0)))
