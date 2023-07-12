@@ -47,6 +47,21 @@ class KnightPathFinder:
                 self._considered_positions.add(move)
             for child in current_node.children:
                 queue.append(child)
+        return self._root
+
+    def find_path(self, end_position):
+        self.build_move_tree()
+        end_node = self._root.depth_search(end_position)
+        return self.trace_to_root(end_node)
+    
+    def trace_to_root(self, end_node):
+        path = [end_node.value]
+        current_node = end_node
+        while current_node.parent:
+            path.append(current_node.parent.value)
+            current_node = current_node.parent
+        return list(reversed(path))
+
 
 # knight = KnightPathFinder((0,0))
 # print(knight.get_valid_moves((5,4)))
@@ -54,7 +69,9 @@ class KnightPathFinder:
 # print(knight.new_move_positions((5,4)))
 # print(knight.new_move_positions((0,0)))
 
-
 # finder = KnightPathFinder((0, 0))
 # finder.build_move_tree()
-# print(finder._root.children)
+# print(finder.find_path((2, 1))) # => [(0, 0), (2, 1)]
+# print(finder.find_path((3, 3))) # => [(0, 0), (2, 1), (3, 3)]
+# print(finder.find_path((6, 2))) # => [(0, 0), (1, 2), (2, 4), (4, 3), (6, 2)]
+# print(finder.find_path((7, 6))) # => [(0, 0), (1, 2), (2, 4), (4, 3), (5, 5), (7, 6)]
