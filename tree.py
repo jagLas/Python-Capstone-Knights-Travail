@@ -46,14 +46,10 @@ class Node:
         if self.value == value:
             return self
         
-        if len(self.children) > 0:
-            left_result = self.children[0].depth_search(value)
-            if left_result is not None:
-                return left_result
-        
-        if len(self.children) > 1:
-            if self.children[1].depth_search(value) is not None:
-                return self.children[1].depth_search(value)
+        for child in self.children:
+            result = child.depth_search(value)
+            if result is not None:
+                return result
 
         return None
     
