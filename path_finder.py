@@ -35,10 +35,26 @@ class KnightPathFinder:
     def new_move_positions(self, pos):
         valid_moves = self.get_valid_moves(pos)
         return valid_moves.difference(self._considered_positions)
-
+    
+    def build_move_tree(self):
+        queue = [self._root]
+        while len(queue):
+            current_node = queue.pop(0)
+            
+            new_moves = self.new_move_positions(current_node.value)
+            for move in new_moves:
+                current_node.add_child(Node(move))
+                self._considered_positions.add(move)
+            for child in current_node.children:
+                queue.append(child)
 
 # knight = KnightPathFinder((0,0))
 # print(knight.get_valid_moves((5,4)))
 # knight._considered_positions.add((7,5))
 # print(knight.new_move_positions((5,4)))
 # print(knight.new_move_positions((0,0)))
+
+
+# finder = KnightPathFinder((0, 0))
+# finder.build_move_tree()
+# print(finder._root.children)
