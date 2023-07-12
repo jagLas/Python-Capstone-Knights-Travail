@@ -18,7 +18,10 @@ class KnightPathFinder:
             else:
                 new_xs = [x+1, x-1]
                 new_ys = [y+2, y-2]
-            
+            new_xs = tuple(filter(lambda x: x >= 0 and x<8, new_xs))
+            new_ys = tuple(filter(lambda y: y >= 0 and y<8, new_ys))
+            print(new_xs)
+            print(new_ys)
             for j in range(len(new_xs)):
                 for k in range(len(new_ys)):
                     possible_moves.add((new_xs[j], new_ys[k]))
@@ -28,4 +31,4 @@ class KnightPathFinder:
 
 
 knight = KnightPathFinder((0,0))
-print(knight.get_valid_moves((0,0)))
+print(knight.get_valid_moves((5,4)))
